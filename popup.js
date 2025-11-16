@@ -12,11 +12,7 @@ activateBtn.addEventListener("click", () => {
         );
     });
 
-    if (active === true) {
-        if (!activateBtn.classList.contains("active")) {
-            activateBtn.classList.add("active")
-        }
-    }
+    activateBtn.classList.add("active");
 });
 
 deactivateBtn.addEventListener("click", () => {
@@ -27,8 +23,5 @@ deactivateBtn.addEventListener("click", () => {
             "disable_ruler"
         )
     })
-
-    if (active === false) {
-        deactivateBtn.classList.remove("active")
-    }
+    activateBtn.classList.remove("active");
 });

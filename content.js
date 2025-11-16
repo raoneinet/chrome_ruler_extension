@@ -27,6 +27,7 @@ function enableRuler() {
     if (isEnabled) return;
     isEnabled = true;
 
+    getRemfromBrowser();
     createOverlay();
 
     document.addEventListener("mousedown", onStart);
@@ -48,8 +49,6 @@ function onStart(e) {
     mouseDown = true;
     startX = e.clientX;
     startY = e.clientY;
-
-    getRemfromBrowser();
 }
 
 function getRemfromBrowser() {
