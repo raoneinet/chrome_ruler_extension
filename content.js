@@ -72,7 +72,7 @@ function onMove(e) {
             top: ${e.clientY + 10}px;
             background-color: black;
             color: white;
-            padding-left: 100px;
+            padding: 4px 5px;
             font-size: 12px;
             border-radius: 4px;
             pointer-events: none;
