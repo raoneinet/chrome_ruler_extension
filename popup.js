@@ -8,6 +8,10 @@ document.getElementById("activate").onclick = () => {
             "enable_ruler"
         );
     });
+
+    if(active === true){
+        document.querySelector("#activate").classList.add("active")
+    }
 };
 
 document.getElementById("deactivate").onclick = ()=> {
@@ -18,4 +22,8 @@ document.getElementById("deactivate").onclick = ()=> {
             "disable_ruler"
         )
     })
+
+    if(active === false){
+        document.querySelector("#activate").classList.remove("active")
+    }
 }
