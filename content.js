@@ -3,6 +3,7 @@ let overlay = null;
 let label = null;
 let startX = 0;
 let startY = 0;
+let rem = 0;
 let mouseDown = false;
 
 function createOverlay() {
@@ -47,6 +48,16 @@ function onStart(e) {
     mouseDown = true;
     startX = e.clientX;
     startY = e.clientY;
+
+    getRemfromBrowser();
+}
+
+function getRemfromBrowser() {
+    const rootFont = window.getComputedStyle(document.documentElement).fontSize;
+
+    if (rootFont) {
+        rem = parseFloat(rootFont)
+    }
 }
 
 function onMove(e) {
@@ -54,6 +65,8 @@ function onMove(e) {
 
     const w = Math.abs(e.clientX - startX);
     const h = Math.abs(e.clientY - startY);
+    const remW = Math.abs(w / rem);
+    const remY = Math.abs(h / rem);
 
     overlay.innerHTML = `
         <div style="
@@ -76,7 +89,10 @@ function onMove(e) {
             font-size: 12px;
             border-radius: 4px;
             pointer-events: none;
-        ">w: ${w}px × h: ${h}px</div>
+        ">
+            <div>w: ${w}px × h: ${h}px<div>
+            <div style="font-size: 10px;">${remW.toFixed(3)}rem x ${remY.toFixed(3)}rem</div>
+        </div>
     `;
 }
 
