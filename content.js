@@ -70,13 +70,13 @@ function onMove(e) {
             position: fixed;
             left: ${e.clientX + 10}px;
             top: ${e.clientY + 10}px;
-            background: black;
+            background-color: black;
             color: white;
-            padding: 4px;
+            padding-left: 100px;
             font-size: 12px;
             border-radius: 4px;
             pointer-events: none;
-        ">${w}px × ${h}px</div>
+        ">w: ${w}px × h: ${h}px</div>
     `;
 }
 
