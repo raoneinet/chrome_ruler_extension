@@ -27,6 +27,7 @@ function enableRuler() {
     if (isEnabled) return;
     isEnabled = true;
 
+    getRemfromBrowser();
     createOverlay();
 
     document.addEventListener("mousedown", onStart);
@@ -48,8 +49,6 @@ function onStart(e) {
     mouseDown = true;
     startX = e.clientX;
     startY = e.clientY;
-
-    getRemfromBrowser();
 }
 
 function getRemfromBrowser() {
@@ -91,7 +90,9 @@ function onMove(e) {
             pointer-events: none;
         ">
             <div>w: ${w}px × h: ${h}px<div>
-            <div style="font-size: 10px;">${remW.toFixed(3)}rem x ${remY.toFixed(3)}rem</div>
+            <div style="font-size: 10px;">
+                ${remW.toFixed(2)}rem x ${remY.toFixed(2)}rem
+            </div>
         </div>
     `;
 }
