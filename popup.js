@@ -3,13 +3,14 @@ let active = false;
 const activateBtn = document.getElementById("activate")
 const deactivateBtn = document.getElementById("deactivate")
 
-document.addEventListener("DOMContentLoaded", ()=>{
-    chrome.storage.local.get("rulerActive", (data)=>{
-        if(data.rulerActive){
-            activateBtn.classList.add("active");
-        }else {
-            activateBtn.classList.remove("active");
-        }
+document.addEventListener("DOMContentLoaded", () => {
+    chrome.storage.local.get("rulerActive", (data) => {
+        const active = Boolean(data.rulerActive);
+
+        if (active) activateBtn.classList.add("active");
+        else activateBtn.classList.remove("active");
+
+        deactivateBtn.classList.add("inactive");
     });
 });
 
@@ -42,6 +43,7 @@ activateBtn.addEventListener("click", () => {
     });
 
     activateBtn.classList.add("active");
+    deactivateBtn.classList.remove("inactive");
     chrome.storage.local.set({rulerActive: true})
 
 });
@@ -56,6 +58,7 @@ deactivateBtn.addEventListener("click", () => {
     })
 
     activateBtn.classList.remove("active");
+    deactivateBtn.classList.add("inactive");
     chrome.storage.local.set({rulerActive: false})
 
 });

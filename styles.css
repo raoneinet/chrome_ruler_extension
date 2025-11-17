@@ -18,3 +18,8 @@ button{
     background-color: #008000;
     color: #fff;
 }
+
+.inactive{
+    background-color: #880808;
+    color: #fff;
+}
