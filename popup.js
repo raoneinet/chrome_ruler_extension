@@ -1,32 +1,47 @@
-let active = false;
 
 const activateBtn = document.getElementById("activate")
 const deactivateBtn = document.getElementById("deactivate")
 
-document.addEventListener("DOMContentLoaded", ()=>{
-    chrome.storage.local.get("rulerActive", (data)=>{
-        if(data.rulerActive){
-            activateBtn.classList.add("active");
-        }else {
-            activateBtn.classList.remove("active");
-        }
-    });
-});
+function updateActiveBtn(active) {
+    if (active) {
+        activateBtn.classList.add("active");
+        deactivateBtn.classList.remove("inactive");
+    } else {
+        activateBtn.classList.remove("active");
+        deactivateBtn.classList.add("inactive");
+    }
+}
+
+function loadState() {
+    chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
+        const tabId = String(tabs[0].id);
+
+        chrome.storage.session.get(tabId, data => {
+            updateActiveBtn(Boolean(data[tabId]));
+        })
+    })
+}
+
+document.addEventListener("DOMContentLoaded", loadState);
 
 activateBtn.addEventListener("click", () => {
-    active = true;
+
     chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
         const url = tabs[0].url
 
-        if(!url.startsWith("http")){
+        if (!url.startsWith("http")) {
             console.log("It's not possible to run the Ruler in this url")
             return
         }
 
+        chrome.storage.session.set({ [String(tabs[0].id)]: true }, () => {
+            updateActiveBtn(true);
+        });
+
         chrome.scripting.executeScript({
             target: { tabId: tabs[0].id },
             files: ["content.js"]
-            },
+        },
             () => {
                 chrome.tabs.sendMessage(
                     tabs[0].id,
@@ -40,22 +55,17 @@ activateBtn.addEventListener("click", () => {
             }
         )
     });
-
-    activateBtn.classList.add("active");
-    chrome.storage.local.set({rulerActive: true})
-
 });
 
 deactivateBtn.addEventListener("click", () => {
-    active = false;
     chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
+        chrome.storage.session.set({ [String(tabs[0].id)]: false }, () => {
+            updateActiveBtn(false);
+        });
+
         chrome.tabs.sendMessage(
             tabs[0].id,
             "disable_ruler"
         )
     })
-
-    activateBtn.classList.remove("active");
-    chrome.storage.local.set({rulerActive: false})
-
 });
