@@ -3,6 +3,16 @@ let active = false;
 const activateBtn = document.getElementById("activate")
 const deactivateBtn = document.getElementById("deactivate")
 
+document.addEventListener("DOMContentLoaded", ()=>{
+    chrome.storage.local.get("rulerActive", (data)=>{
+        if(data.rulerActive){
+            activateBtn.classList.add("active");
+        }else {
+            activateBtn.classList.remove("active");
+        }
+    });
+});
+
 activateBtn.addEventListener("click", () => {
     active = true;
     chrome.tabs.query({ active: true, currentWindow: true }, tabs => {
@@ -32,6 +42,8 @@ activateBtn.addEventListener("click", () => {
     });
 
     activateBtn.classList.add("active");
+    chrome.storage.local.set({rulerActive: true})
+
 });
 
 deactivateBtn.addEventListener("click", () => {
@@ -42,5 +54,8 @@ deactivateBtn.addEventListener("click", () => {
             "disable_ruler"
         )
     })
+
     activateBtn.classList.remove("active");
+    chrome.storage.local.set({rulerActive: false})
+
 });
