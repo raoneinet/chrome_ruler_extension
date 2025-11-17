@@ -31,7 +31,7 @@ activateBtn.addEventListener("click", () => {
                 chrome.tabs.sendMessage(
                     tabs[0].id,
                     "enable_ruler",
-                    (response) => {
+                    () => {
                         if (chrome.runtime.lastError) {
                             console.log("Content script  is not available")
                         }
