@@ -90,7 +90,9 @@ function onMove(e) {
             pointer-events: none;
         ">
             <div>w: ${w}px × h: ${h}px<div>
-            <div style="font-size: 10px;">${remW.toFixed(3)}rem x ${remY.toFixed(3)}rem</div>
+            <div style="font-size: 10px;">
+                ${remW.toFixed(2)}rem x ${remY.toFixed(2)}rem
+            </div>
         </div>
     `;
 }
