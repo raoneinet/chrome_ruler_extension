@@ -33,6 +33,8 @@ function enableRuler() {
     document.addEventListener("mousedown", onStart);
     document.addEventListener("mousemove", onMove);
     document.addEventListener("mouseup", onStop);
+
+    document.body.style.userSelect = "none";
 }
 
 function disableRuler() {
@@ -43,6 +45,8 @@ function disableRuler() {
     document.removeEventListener("mouseup", onStop);
 
     removeOverlay();
+
+    document.body.style.userSelect = "";
 }
 
 function onStart(e) {
