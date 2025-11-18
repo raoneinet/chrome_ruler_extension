@@ -68,7 +68,13 @@ function copyPixelResult(e) {
     const h = Math.abs(e.clientY - startY);
 
     const pixels = `w: ${w}px x h: ${h}px`
-    navigator.clipboard.writeText(pixels)
+    const copyRes = navigator.clipboard.writeText(pixels)
+
+    if(copyRes){
+        setTimeout(()=>{
+            alert("Copiado: "+pixels)
+        }, 200)
+    }
 }
 
 function onMove(e) {
