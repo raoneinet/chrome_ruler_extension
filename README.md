@@ -6,7 +6,7 @@ With this extension, you can measure the dimensions of any part of the page wher
 
 
 
-✨ Features
+Features
 
 📏 Measures width and height in pixels
 
@@ -16,7 +16,7 @@ With this extension, you can measure the dimensions of any part of the page wher
 
 
 
-🧩 Output format:
+Output format:
 
 w: 0px | h: 0px
 
@@ -38,7 +38,7 @@ The value is automatically copied to the clipboard.
 
 
 
-📐 Measurement Units
+Measurement Units
 
 px → pixel
 
@@ -48,7 +48,7 @@ The conversion is based on the page’s root font-size (typically 16px).
 
 
 
-⚙️ Extension Behavior
+Extension Behavior
 
 When activated in a tab, the extension remains active until it is manually deactivated or the page is reloaded.
 
