@@ -1,7 +1,6 @@
 Pixel Ruler
 
 A project designed to solve a common need for front-end developers and designers: quickly measuring areas on a webpage.
-
 With this extension, you can measure the dimensions of any part of the page where the extension is active.
 
 
@@ -57,6 +56,7 @@ However, deactivation must be done manually in each tab.
 Project Structure
 
 chrome_ruler_extension/
+
 │
 ├── content.js 
 
