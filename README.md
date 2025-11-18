@@ -3,9 +3,7 @@ Pixel Ruler
 A project designed to solve a common need for front-end developers and designers: quickly measuring areas on a webpage.
 With this extension, you can measure the dimensions of any part of the page where the extension is active.
 
-
-
-
+<br>
 **Features**
 
 📏 Measures width and height in pixels
@@ -14,14 +12,12 @@ With this extension, you can measure the dimensions of any part of the page wher
 
 📋 Automatically copies the final measurement result to the clipboard
 
-
-
+<br>
 **Output format:**
 
 w: 0px | h: 0px
 
-
-
+<br>
 **How to Use**
 
 Activate the extension in a Google Chrome tab.
@@ -36,8 +32,7 @@ The measurement is completed.
 
 The value is automatically copied to the clipboard.
 
-
-
+<br>
 **Measurement Units**
 
 px → pixel
@@ -46,7 +41,7 @@ rem → root em
 
 The conversion is based on the page’s root font-size (typically 16px).
 
-
+<br/>
 
 **Extension Behavior**
 
@@ -57,7 +52,7 @@ The extension is always deactivated automatically after a page reload.
 You can activate and use the extension in multiple tabs simultaneously.
 
 However, deactivation must be done manually in each tab.
-
+<br>
 
 **Project Structure**
 
