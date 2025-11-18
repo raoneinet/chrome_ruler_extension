@@ -63,6 +63,14 @@ function getRemfromBrowser() {
     }
 }
 
+function copyPixelResult(e) {
+    const w = Math.abs(e.clientX - startX);
+    const h = Math.abs(e.clientY - startY);
+
+    const pixels = `w: ${w}px x h: ${h}px`
+    navigator.clipboard.writeText(pixels)
+}
+
 function onMove(e) {
     if (!mouseDown || !overlay) return;
 
@@ -101,9 +109,11 @@ function onMove(e) {
     `;
 }
 
-function onStop() {
+function onStop(e) {
     mouseDown = false;
     if (overlay) overlay.innerHTML = "";
+
+    copyPixelResult(e)
 }
 
 // Recebe comando do popup
