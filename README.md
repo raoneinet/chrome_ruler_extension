@@ -52,6 +52,7 @@ The extension is always deactivated automatically after a page reload.
 You can activate and use the extension in multiple tabs simultaneously.
 
 However, deactivation must be done manually in each tab.
+
 <br/>
 
 **Project Structure**
