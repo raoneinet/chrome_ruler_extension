@@ -30,7 +30,7 @@ activateBtn.addEventListener("click", () => {
         const url = tabs[0].url
 
         if (!url.startsWith("http")) {
-            console.log("It's not possible to run the Ruler in this url")
+            console.log("Error running in this URL. It should start with http.")
             return
         }
 
