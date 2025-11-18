@@ -61,13 +61,15 @@ chrome_ruler_extension/
 
 │
 
-├── content.js 
+├── content.js      // Handles measurement logic injected into the webpage
 
-├── manifest.json 
+├── manifest.json   // Extension configuration and permissions
 
-├── popup.html
+├── popup.html      // Popup UI layout
 
-├── popup.js 
+├── popup.js        // Popup logic and interactions
 
-└── style.css 
+└── style.css       // Styles for popup interface
+
+
 
