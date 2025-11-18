@@ -1,0 +1,59 @@
+Pixel Ruler
+
+A project designed to solve a common need for front-end developers and designers: quickly measuring areas on a webpage.
+
+With this extension, you can measure the dimensions of any part of the page where the extension is active.
+
+✨ Features
+
+📏 Measures width and height in pixels
+
+🔄 Converts values from px → rem
+
+📋 Automatically copies the final measurement result to the clipboard
+
+🧩 Output format:
+
+w: 0px | h: 0px
+
+How to Use
+
+Activate the extension in a Google Chrome tab.
+
+Click and hold the left mouse button on the area you want to measure.
+
+Drag to define the measurement area.
+
+When you release the mouse button:
+
+The measurement is completed.
+
+The value is automatically copied to the clipboard.
+
+📐 Measurement Units
+
+px → pixel
+
+rem → root em
+
+The conversion is based on the page’s root font-size (typically 16px).
+
+⚙️ Extension Behavior
+
+When activated in a tab, the extension remains active until it is manually deactivated or the page is reloaded.
+
+The extension is always deactivated automatically after a page reload.
+
+You can activate and use the extension in multiple tabs simultaneously.
+
+However, deactivation must be done manually in each tab.
+
+Project Structure
+
+chrome_ruler_extension/
+│
+├── content.js      // Handles measurement logic injected into the webpage
+├── manifest.json   // Extension configuration and permissions
+├── popup.html      // Popup UI layout
+├── popup.js        // Popup logic and interactions
+└── style.css       // Styles for popup interface
