@@ -4,6 +4,7 @@ A project designed to solve a common need for front-end developers and designers
 With this extension, you can measure the dimensions of any part of the page where the extension is active.
 
 
+
 ✨ Features
 
 📏 Measures width and height in pixels
@@ -13,9 +14,11 @@ With this extension, you can measure the dimensions of any part of the page wher
 📋 Automatically copies the final measurement result to the clipboard
 
 
+
 🧩 Output format:
 
 w: 0px | h: 0px
+
 
 
 How to Use
@@ -33,6 +36,7 @@ The measurement is completed.
 The value is automatically copied to the clipboard.
 
 
+
 📐 Measurement Units
 
 px → pixel
@@ -40,6 +44,7 @@ px → pixel
 rem → root em
 
 The conversion is based on the page’s root font-size (typically 16px).
+
 
 
 ⚙️ Extension Behavior
@@ -58,6 +63,7 @@ Project Structure
 chrome_ruler_extension/
 
 │
+
 ├── content.js 
 
 ├── manifest.json 
