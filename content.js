@@ -63,18 +63,51 @@ function getRemfromBrowser() {
     }
 }
 
+function createMessagePopup(pixelMsg) {
+    const toast = document.createElement("div");
+    toast.textContent = pixelMsg;
+
+    toast.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: rgba(1, 1, 107, 0.8);
+        color: #fff;
+        padding: 8px 12px;
+        margin: 0;
+        font-size: 13px;
+        border-radius: 6px;
+        z-index: 999999999;
+        opacity: 0;
+        transition: opacity 0.25s ease;
+        pointer-events: none;
+    `;
+
+    document.body.appendChild(toast)
+
+    requestAnimationFrame(() => {
+        toast.style.opacity = "1";
+    });
+
+    setTimeout(() => {
+        toast.style.opacity = "0"
+        setTimeout(() => toast.remove(), 300);
+    }, 1200)
+}
+
 function copyPixelResult(e) {
     const w = Math.abs(e.clientX - startX);
     const h = Math.abs(e.clientY - startY);
 
-    if(w === 0 && h === 0 ) return
-    
-    const pixels = `w: ${w}px | h: ${h}px`
-    const copyRes = navigator.clipboard.writeText(pixels)
+    if (w === 0 && h === 0) return
 
-    if(copyRes){
-        setTimeout(()=>{
-            alert("Copiado: "+pixels)
+    const pixels = `w: ${w}px | h: ${h}px`
+    const copyRes = navigator.clipboard.writeText(pixels);
+    const pixelMsg = `Copiado: ${pixels}`;
+
+    if (copyRes) {
+        setTimeout(() => {
+            createMessagePopup(pixelMsg)
         }, 200)
     }
 }
