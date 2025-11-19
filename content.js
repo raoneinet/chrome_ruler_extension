@@ -92,7 +92,7 @@ function createMessagePopup(pixelMsg) {
     setTimeout(() => {
         toast.style.opacity = "0"
         setTimeout(() => toast.remove(), 300);
-    }, 1200)
+    }, 1500)
 }
 
 function copyPixelResult(e) {
