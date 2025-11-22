@@ -10,7 +10,7 @@ With this extension, you can measure the dimensions of any part of the page wher
 
 🔄 Converts values from px → rem
 
-📋 Automatically copies the final measurement result to the clipboard
+📋 Copies the final measurement result to the clipboard (if selected Yes on popup   button)
 
 <br/>
 **Output format:**
@@ -28,9 +28,9 @@ Drag to define the measurement area.
 
 When you release the mouse button:
 
-The measurement is completed.
+The measurement is completed and pops up a question 'Copy?' with Y (yes) or N (no) options.
 
-The value is automatically copied to the clipboard.
+The value is copied to the clipboard after Y (yes) selected.
 
 <br/>
 **Measurement Units**
