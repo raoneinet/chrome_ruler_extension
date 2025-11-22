@@ -8,6 +8,7 @@ let lastH = 0;
 let rem = 0;
 let mouseDown = false;
 let confirmCopy = false;
+let isDragging = false;
 
 function createOverlay() {
     overlay = document.createElement("div");
@@ -54,6 +55,7 @@ function disableRuler() {
 
 function onStart(e) {
     mouseDown = true;
+    isDragging = false;
     startX = e.clientX;
     startY = e.clientY;
 }
@@ -62,7 +64,7 @@ function getRemfromBrowser() {
     const rootFont = window.getComputedStyle(document.documentElement).fontSize;
 
     if (rootFont) {
-        rem = parseFloat(rootFont)
+        rem = parseFloat(rootFont);
     }
 }
 
@@ -86,14 +88,14 @@ function createMessagePopup(pixelMsg) {
         pointer-events: none;
     `;
 
-    document.body.appendChild(toast)
+    document.body.appendChild(toast);
 
     requestAnimationFrame(() => {
         toast.style.opacity = "1";
     });
 
     setTimeout(() => {
-        toast.style.opacity = "0"
+        toast.style.opacity = "0";
         setTimeout(() => toast.remove(), 300);
     }, 1500);
 }
@@ -111,8 +113,8 @@ function confirmCopyResult() {
 
         let resolved = false;
 
-        function safeResolve(value){
-            if(!resolved){
+        function safeResolve(value) {
+            if (!resolved) {
                 resolved = true;
                 resolve(value);
             }
@@ -120,12 +122,12 @@ function confirmCopyResult() {
 
         yesDiv.addEventListener("click", () => {
             confirmDiv.remove();
-            safeResolve(true)
+            safeResolve(true);
         });
 
         noDiv.addEventListener("click", () => {
             confirmDiv.remove();
-            safeResolve(false)
+            safeResolve(false);
         });
 
         confirmDiv.style.cssText = `
@@ -154,7 +156,7 @@ function confirmCopyResult() {
         });
 
         setTimeout(() => {
-            confirmDiv.style.opacity = "0"
+            confirmDiv.style.opacity = "0";
             setTimeout(() => {
                 confirmDiv.remove();
                 safeResolve(false);
@@ -164,17 +166,23 @@ function confirmCopyResult() {
 }
 
 function copyPixelResult() {
-    if (lastW === 0 && lastH === 0) return
+    if (lastW === 0 && lastH === 0) return;
 
-    const pixels = `w: ${lastW}px | h: ${lastH}px`
+    const pixels = `w: ${lastW}px | h: ${lastH}px`;
     navigator.clipboard.writeText(pixels)
-        .then(()=>{
+        .then(() => {
             createMessagePopup(`Copiado: ${pixels}`);
         });
 }
 
 function onMove(e) {
     if (!mouseDown || !overlay) return;
+
+    if (!isDragging) {
+        startX = e.clientX;
+        startY = e.clientY;
+        isDragging = true;
+    }
 
     lastW = Math.abs(e.clientX - startX);
     lastH = Math.abs(e.clientY - startY);
@@ -213,13 +221,17 @@ function onMove(e) {
 
 async function onStop() {
     mouseDown = false;
+
+    if (!isDragging) return;
+    isDragging = true;
+
     if (overlay) overlay.innerHTML = "";
 
-    const userChoice = await confirmCopyResult()
+    const userChoice = await confirmCopyResult();
     if (userChoice) {
-        copyPixelResult()
+        copyPixelResult();
     } else {
-        return
+        return;
     }
 
 }
