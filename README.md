@@ -67,6 +67,8 @@ chrome_ruler_extension/
 
 ├── popup.html        // Popup UI layout
 
+├── background.js     // clean chrome.session.storage to reset extension and buttons
+
 ├── popup.js          // Popup logic and interactions
 
 └── style.css         // Styles for popup interface
