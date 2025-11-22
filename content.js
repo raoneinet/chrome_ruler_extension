@@ -5,6 +5,7 @@ let startX = 0;
 let startY = 0;
 let rem = 0;
 let mouseDown = false;
+let confirmCopy = false;
 
 function createOverlay() {
     overlay = document.createElement("div");
@@ -71,7 +72,7 @@ function createMessagePopup(pixelMsg) {
         position: fixed;
         top: 20px;
         right: 20px;
-        background: rgba(1, 1, 107, 0.8);
+        background-color: rgba(1, 1, 107, 0.8);
         color: #fff;
         padding: 8px 12px;
         margin: 0;
@@ -92,7 +93,72 @@ function createMessagePopup(pixelMsg) {
     setTimeout(() => {
         toast.style.opacity = "0"
         setTimeout(() => toast.remove(), 300);
-    }, 1500)
+    }, 1500);
+}
+
+function confirmCopyResult() {
+    return new Promise((resolve) => {
+        const confirmDiv = document.createElement("div");
+        const p = document.createElement("p");
+        const yesDiv = document.createElement("button");
+        const noDiv = document.createElement("button");
+
+        p.textContent = "Copy?";
+        yesDiv.textContent = "Y";
+        noDiv.textContent = "N";
+
+        let resolved = false;
+
+        function safeResolve(value){
+            if(!resolved){
+                resolved = true;
+                resolve(value);
+            }
+        }
+
+        yesDiv.addEventListener("click", () => {
+            confirmDiv.remove();
+            safeResolve(true)
+        });
+
+        noDiv.addEventListener("click", () => {
+            confirmDiv.remove();
+            safeResolve(false)
+        });
+
+        confirmDiv.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background-color: rgba(0,0,255,0.1);
+        color: #fff;
+        padding: 8px 12px;
+        margin: 0;
+        font-size: 13px;
+        border-radius: 6px;
+        z-index: 999999999;
+        opacity: 0;
+        transition: opacity 0.25s ease;
+        display: flex;
+        flex-direction: column;
+    `;
+
+        confirmDiv.append(p, yesDiv, noDiv);
+
+        document.body.append(confirmDiv);
+
+        requestAnimationFrame(() => {
+            confirmDiv.style.opacity = "1";
+        });
+
+        setTimeout(() => {
+            confirmDiv.style.opacity = "0"
+            setTimeout(() => {
+                confirmDiv.remove();
+                safeResolve(false);
+            }, 800);
+        }, 2500);
+    });
 }
 
 function copyPixelResult(e) {
@@ -128,7 +194,7 @@ function onMove(e) {
             width: ${w}px;
             height: ${h}px;
             border: 1px dashed #00f;
-            background: rgba(0,0,255,0.1);
+            background-color: rgba(0,0,255,0.1);
             pointer-events: none;
         "></div>
         <div style="
@@ -150,11 +216,17 @@ function onMove(e) {
     `;
 }
 
-function onStop(e) {
+async function onStop(e) {
     mouseDown = false;
     if (overlay) overlay.innerHTML = "";
 
-    copyPixelResult(e)
+    const userChoice = await confirmCopyResult()
+    if (userChoice) {
+        copyPixelResult(e)
+    } else {
+        return
+    }
+
 }
 
 // Recebe comando do popup
