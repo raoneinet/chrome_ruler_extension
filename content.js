@@ -131,21 +131,21 @@ function confirmCopyResult() {
         });
 
         confirmDiv.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background-color: rgba(0,0,255,0.1);
-        color: #fff;
-        padding: 8px 12px;
-        margin: 0;
-        font-size: 13px;
-        border-radius: 6px;
-        z-index: 999999999;
-        opacity: 0;
-        transition: opacity 0.25s ease;
-        display: flex;
-        flex-direction: column;
-    `;
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(1, 1, 107, 0.8);
+            color: #fff;
+            padding: 8px 12px;
+            margin: 0;
+            font-size: 13px;
+            border-radius: 6px;
+            z-index: 999999999;
+            opacity: 0;
+            transition: opacity 0.25s ease;
+            display: flex;
+            flex-direction: column;
+        `;
 
         confirmDiv.append(p, yesDiv, noDiv);
 
