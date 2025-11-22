@@ -77,5 +77,6 @@ chrome_ruler_extension/
 <br/>
 
 Created and Designed by
+<br/>
 Raone Ferreira
 
