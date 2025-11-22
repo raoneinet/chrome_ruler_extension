@@ -236,7 +236,7 @@ async function onStop() {
     mouseDown = false;
 
     if (!isDragging) return;
-    isDragging = true;
+    isDragging = false;
 
     if (overlay) overlay.innerHTML = "";
 
