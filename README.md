@@ -74,4 +74,6 @@ chrome_ruler_extension/
 └── style.css         // Styles for popup interface
 
 
+Created and Designed by
+Raone Ferreira
 
