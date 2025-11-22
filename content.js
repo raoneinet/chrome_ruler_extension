@@ -130,6 +130,18 @@ function confirmCopyResult() {
             safeResolve(false);
         });
 
+        yesDiv.style.cssText = `
+            background-color: #fff;
+            color: #000;
+            border-radius: 4px;
+        `;
+
+        noDiv.style.cssText = `
+            background-color: #fff;
+            color: #000;
+            border-radius: 4px;
+        `;
+
         confirmDiv.style.cssText = `
             position: fixed;
             top: 20px;
@@ -145,6 +157,7 @@ function confirmCopyResult() {
             transition: opacity 0.25s ease;
             display: flex;
             flex-direction: column;
+            gap: 3px;
         `;
 
         confirmDiv.append(p, yesDiv, noDiv);
