@@ -1,3 +1,22 @@
+chrome.runtime.onMessage.addListener((message, sender, sendResponse)=>{
+    if(message === "check_status"){
+        sendResponse({active: true});
+        return true;
+    }
+
+    if(message === "enable_ruler"){
+        enableRuler();
+        sendResponse({success: true});
+        return true
+    }
+
+    if(message === "disable_ruler"){
+        disableRuler();
+        sendResponse({success: true});
+        return true;
+    }
+})
+
 let isEnabled = false;
 let overlay = null;
 let label = null;
@@ -250,7 +269,7 @@ async function onStop() {
 }
 
 // Recebe comando do popup
-chrome.runtime.onMessage.addListener((msg) => {
-    if (msg === "enable_ruler") enableRuler();
-    if (msg === "disable_ruler") disableRuler();
-});
+// chrome.runtime.onMessage.addListener((msg) => {
+//     if (msg === "enable_ruler") enableRuler();
+//     if (msg === "disable_ruler") disableRuler();
+// });

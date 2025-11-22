@@ -17,7 +17,23 @@ function loadState() {
         const tabId = String(tabs[0].id);
 
         chrome.storage.session.get(tabId, data => {
-            updateActiveBtn(Boolean(data[tabId]));
+            const isActive = Boolean(data[tabId]);
+
+            updateActiveBtn(isActive);
+            
+            if(isActive){
+                chrome.tabs.sendMessage(
+                    tabs[0].id,
+                    "check_status",
+                    response => {
+                        if(chrome.runtime.lastError || !response){
+                            chrome.storage.session.set({[tabId]: false}, ()=>{
+                                updateActiveBtn(false)
+                            })
+                        }
+                    }
+                )
+            }
         })
     })
 }
