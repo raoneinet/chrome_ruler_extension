@@ -3,6 +3,8 @@ let overlay = null;
 let label = null;
 let startX = 0;
 let startY = 0;
+let lastW = 0;
+let lastH = 0;
 let rem = 0;
 let mouseDown = false;
 let confirmCopy = false;
@@ -161,38 +163,31 @@ function confirmCopyResult() {
     });
 }
 
-function copyPixelResult(e) {
-    const w = Math.abs(e.clientX - startX);
-    const h = Math.abs(e.clientY - startY);
+function copyPixelResult() {
+    if (lastW === 0 && lastH === 0) return
 
-    if (w === 0 && h === 0) return
-
-    const pixels = `w: ${w}px | h: ${h}px`
-    const copyRes = navigator.clipboard.writeText(pixels);
-    const pixelMsg = `Copiado: ${pixels}`;
-
-    if (copyRes) {
-        setTimeout(() => {
-            createMessagePopup(pixelMsg)
-        }, 200)
-    }
+    const pixels = `w: ${lastW}px | h: ${lastH}px`
+    navigator.clipboard.writeText(pixels)
+        .then(()=>{
+            createMessagePopup(`Copiado: ${pixels}`);
+        });
 }
 
 function onMove(e) {
     if (!mouseDown || !overlay) return;
 
-    const w = Math.abs(e.clientX - startX);
-    const h = Math.abs(e.clientY - startY);
-    const remW = Math.abs(w / rem);
-    const remY = Math.abs(h / rem);
+    lastW = Math.abs(e.clientX - startX);
+    lastH = Math.abs(e.clientY - startY);
+    const remW = Math.abs(lastW / rem);
+    const remY = Math.abs(lastH / rem);
 
     overlay.innerHTML = `
         <div style="
             position: fixed;
             left: ${Math.min(e.clientX, startX)}px;
             top: ${Math.min(e.clientY, startY)}px;
-            width: ${w}px;
-            height: ${h}px;
+            width: ${lastW}px;
+            height: ${lastH}px;
             border: 1px dashed #00f;
             background-color: rgba(0,0,255,0.1);
             pointer-events: none;
@@ -208,7 +203,7 @@ function onMove(e) {
             border-radius: 4px;
             pointer-events: none;
         ">
-            <div>w: ${w}px × h: ${h}px<div>
+            <div>w: ${lastW}px × h: ${lastH}px<div>
             <div style="font-size: 10px;">
                 ${remW.toFixed(2)}rem x ${remY.toFixed(2)}rem
             </div>
@@ -216,13 +211,13 @@ function onMove(e) {
     `;
 }
 
-async function onStop(e) {
+async function onStop() {
     mouseDown = false;
     if (overlay) overlay.innerHTML = "";
 
     const userChoice = await confirmCopyResult()
     if (userChoice) {
-        copyPixelResult(e)
+        copyPixelResult()
     } else {
         return
     }
